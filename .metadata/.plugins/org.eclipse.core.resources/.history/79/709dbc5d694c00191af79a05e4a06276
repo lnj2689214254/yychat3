@@ -1,0 +1,30 @@
+package com.yychatserver.controller;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+
+import com.yychat.model.Message;
+
+public class ServerReceiverThread extends Thread{
+	Socket s;
+	public ServerReceiverThread(Socket s){
+		this.s=s;
+	}
+	public void run(){
+		ObjectInputStream ois;
+		Message mess;
+		try {
+			ois=new ObjectInputStream(s.getInputStream());
+		      mess=(Message)ois.readObject();
+		System.out.println(mess.getSender()+"¶Ô"+mess.getReceiver()+"Ëµ"+mess.getContent());
+		}catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	
+	}
+}
