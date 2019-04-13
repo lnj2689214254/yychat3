@@ -5,6 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Iterator;
+import java.util.Set;
+
+
+
 
 import com.yychat.model.Message;
 
@@ -24,10 +29,26 @@ public class ServerReceiverThread extends Thread{
 		      mess=(Message)ois.readObject();
 		System.out.println(mess.getSender()+"对"+mess.getReceiver()+"说"+mess.getContent());
 		
-		Socket s1=(Socket)StartServer.hmSocket.get(mess.getReceiver());
+		
+		if(mess.getMessageType().equals(Message.message_Common)){
+	Socket s1=(Socket)StartServer.hmSocket.get(mess.getReceiver());
 		oos=new ObjectOutputStream(s1.getOutputStream());
 		oos.writeObject(mess);
-		}catch (IOException e) {
+		}
+		//第二步：服务器接受到请求后发送在线好友消息
+				//if(mess.getMessageType().equals(Message.message_RequestOnlineFriend));
+				//Set friendSet=StartServer.hmSocket.keySet();
+				//Iterator it=friendSet.iterator();
+				//String friendName;
+				//String friendtring=" ";
+				//while(it.hasNext()){
+					
+				//}
+				
+		}
+	
+		
+		catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 	

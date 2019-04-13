@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.Socket;
+import java.util.HashMap;
 
 import javax.swing.*;
 
 public class FriendList extends JFrame implements ActionListener,MouseListener{//顶层容器
+	public static HashMap hmFriendChat1=new HashMap<String,FriendChat1>();
     CardLayout cardLayout;//卡片布局
 	//定义对象的引用变量
 	JPanel  myFriendPanel;//第一张
@@ -56,9 +59,11 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		myFriendListJPanel=new JPanel(new GridLayout(FRIENDCOUNT-1,1));
 		for(int i=1;i<FRIENDCOUNT;i++){
 			myfriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"
+			//myfriendJLabel[i].setEnabled(false);
 			myfriendJLabel[i].addMouseListener(this);//添加鼠标监听器
 			myFriendListJPanel.add(myfriendJLabel[i]);
 			}
+		//myfriendJLabel[Integer.parseInt(userName)].setEnabled(true);
 		//myFriendJScrollPane =new JScrollPane();
 		//myFriendJScrollPane.add(myFriendListJPanel);
 		myFriendJScrollPane =new JScrollPane(myFriendListJPanel);
@@ -136,11 +141,24 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		if(e.getClickCount()==2){
 			JLabel jlbl=(JLabel)e.getSource();
 			String receiver=jlbl.getText();
-			//new FriendChat(this.userName,receiver);
-		     new Thread(new FriendChat(this.userName,receiver)).start();
+			//new FriendChat1(this.userName,receiver);
+		    // new Thread(new FriendChat(this.userName,receiver)).start();//创建线程
+			
+			
+			FriendChat1 friendChat1=(FriendChat1)hmFriendChat1.get(userName+"to"+receiver);
+			if(friendChat1==null)
+			{
+				 friendChat1=new FriendChat1(this.userName,receiver);
+				hmFriendChat1.put(userName+"to"+receiver,friendChat1);
+			}else{
+				friendChat1.setVisible(true);
+			}
+				
+			
 		}
-		
 	}
+		
+
 
 
 	@Override

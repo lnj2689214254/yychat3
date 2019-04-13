@@ -3,6 +3,9 @@ package com.yychatclient.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +21,7 @@ import javax.swing.JTextField;
 import com.yychat.model.Message;
 import com.yychat.model.User;
 import com.yychatserver.controller.ClientConnect;
+
 
 public class ClientLogin extends JFrame implements ActionListener{
 	
@@ -90,9 +94,26 @@ public class ClientLogin extends JFrame implements ActionListener{
 			user.setUserName(userName);
 			user.setPassword(password);
 			
-			Message  mess= new ClientConnect().loginValidate(user);
-			if(mess.getMessageType().equals(Message.message_LoginSuccess)){
+			boolean loginSuccess=new ClientConnect().loginValidate(user);
+			
+			
+			if(loginSuccess){
 		     new FriendList(userName);
+		     
+		     //第一步向服务器发送获取在线用户信息的请求（）Message)
+		     //Message mess=new Message();
+			//	mess.setSender("Server");
+	           // mess.setReceiver(userName);
+	           // mess.setMessageType(Message.message_RequestOnlineFriend);
+	            	//Socket s=(Socket)ClientConnect.hmSocket.get(userName);
+		     //ObjectOutputStream oss;
+		     //try{
+		    	// oss=new ObjectOutputStream(s.getOutputStream());
+		    	 //oss.writeObject(mess);
+		     //}
+		     //catch (IOException e1){
+		    	 //e1.printStackTrace();
+		     }
 		     this.dispose();
 		     }else{
 				JOptionPane.showMessageDialog(this, "密码错误");
@@ -100,4 +121,4 @@ public class ClientLogin extends JFrame implements ActionListener{
 	    }
 	}
 
-}
+

@@ -1,5 +1,0 @@
-package com.yychat.model;
-
-public interface MessageType {
-
-}
