@@ -6,6 +6,7 @@ public class Message implements Serializable,MessageType{
    private  String  sender;
    private String receiver;
    private String content;
+   private String messageType;
    
    public String getContent() {
 	return content;
@@ -13,7 +14,7 @@ public class Message implements Serializable,MessageType{
 public void setContent(String content) {
 	this.content = content;
 }
-private String messageType;
+
 public String getSender() {
 	return sender;
 }

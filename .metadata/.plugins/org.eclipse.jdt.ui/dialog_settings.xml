@@ -35,6 +35,8 @@
 		<item value="448" key="size.x"/>
 	</section>
 	<section name="completion_proposal_size">
+		<item value="1037" key="size.y"/>
+		<item value="446" key="size.x"/>
 	</section>
 	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
 		<item value="726" key="DIALOG_WIDTH"/>

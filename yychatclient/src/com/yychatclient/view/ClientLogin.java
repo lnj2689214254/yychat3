@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ import com.yychatserver.controller.ClientConnect;
 
 
 public class ClientLogin extends JFrame implements ActionListener{
-	
+	public static HashMap hmFriendlist=new HashMap<String,FriendList>();
 	JLabel jlbl1;
 	
 	JTabbedPane jtp1;
@@ -98,21 +99,22 @@ public class ClientLogin extends JFrame implements ActionListener{
 			
 			
 			if(loginSuccess){
-		     new FriendList(userName);
+		     FriendList friendList=new FriendList(userName);
+		     hmFriendlist.put(userName,friendList);
 		     
 		     //第一步向服务器发送获取在线用户信息的请求（）Message)
-		     //Message mess=new Message();
-			//	mess.setSender("Server");
-	           // mess.setReceiver(userName);
-	           // mess.setMessageType(Message.message_RequestOnlineFriend);
-	            	//Socket s=(Socket)ClientConnect.hmSocket.get(userName);
-		     //ObjectOutputStream oss;
-		     //try{
-		    	// oss=new ObjectOutputStream(s.getOutputStream());
-		    	 //oss.writeObject(mess);
-		     //}
-		     //catch (IOException e1){
-		    	 //e1.printStackTrace();
+		     Message mess=new Message();
+			mess.setSender(userName);
+	           mess.setReceiver("Server");
+	            mess.setMessageType(Message.message_RequestOnlineFriend);
+	            	Socket s=(Socket)ClientConnect.hmSocket.get(userName);
+		     ObjectOutputStream oss;
+		     try{
+		    	 oss=new ObjectOutputStream(s.getOutputStream());
+		    	 oss.writeObject(mess);
+		     }
+		     catch (IOException e1){
+		    e1.printStackTrace();
 		     }
 		     this.dispose();
 		     }else{
@@ -121,4 +123,4 @@ public class ClientLogin extends JFrame implements ActionListener{
 	    }
 	}
 
-
+}
