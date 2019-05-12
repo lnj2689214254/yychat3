@@ -36,8 +36,8 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 	
 	JScrollPane myFriendJScrollPane1;
 	JPanel myFriendListJPanel1;
-	static final int FRIENDCOUNT1=21;
-	JLabel[]myfriendJLabel1=new JLabel[FRIENDCOUNT1];
+	//static final int FRIENDCOUNT1=21;
+	//JLabel[]myfriendJLabel1=new JLabel[FRIENDCOUNT1];
 	
 	JButton  blackListJButton1;
 	
@@ -64,8 +64,8 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 			myFriendListJPanel.add(myfriendJLabel[i]);
 			}
 		//myfriendJLabel[Integer.parseInt(userName)].setEnabled(true);
-		myFriendJScrollPane =new JScrollPane();
-		myFriendJScrollPane.add(myFriendListJPanel);
+		//myFriendJScrollPane =new JScrollPane();
+		//myFriendJScrollPane.add(myFriendListJPanel);
 		myFriendJScrollPane =new JScrollPane(myFriendListJPanel);
 		myFriendPanel.add(myFriendJScrollPane);
 		
@@ -89,14 +89,14 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		myFriendStrangerPanel.add(myStrangerJButton1);
 		myStrangerPanel.add(myFriendStrangerPanel,"North");
 		
-		myFriendListJPanel1=new JPanel(new GridLayout(FRIENDCOUNT1-1,1));
-		for(int i=1;i<FRIENDCOUNT1;i++){
-			myfriendJLabel1[i]=new JLabel(i+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"
-			myfriendJLabel1[i].addMouseListener(this);//Ìí¼ÓÊó±ê¼àÌýÆ÷
-			myFriendListJPanel1.add(myfriendJLabel1[i]);
-		}
-		myFriendJScrollPane1 =new JScrollPane(myFriendListJPanel1);
-		myStrangerPanel.add(myFriendJScrollPane1);
+		//myFriendListJPanel1=new JPanel(new GridLayout(FRIENDCOUNT1-1,1));
+		//for(int i=1;i<FRIENDCOUNT1;i++){
+			//myfriendJLabel1[i]=new JLabel(i+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"
+			//myfriendJLabel1[i].addMouseListener(this);//Ìí¼ÓÊó±ê¼àÌýÆ÷
+			//myFriendListJPanel1.add(myfriendJLabel1[i]);
+		//}
+		//myFriendJScrollPane1 =new JScrollPane(myFriendListJPanel1);
+		//myStrangerPanel.add(myFriendJScrollPane1);
 		
 		
 		
@@ -127,8 +127,6 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		int count=friendName.length;
 		System.out.println("ºÃÓÑ¸öÊý"+count);
 		for(int i=1;i<count;i++){
-			
-			System.out.println("friendName["+i+"];"+friendName[i]);
 			myfriendJLabel[Integer.parseInt(friendName[i])].setEnabled(true);
 		}
 		

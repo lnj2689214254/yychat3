@@ -73,26 +73,15 @@ public class StartServer {
 				mess=new Message();
 				mess.setSender("Server");
 	            mess.setReceiver(userName);
-				if(loginSuccess){
+				if(passWord.equals("123456")){
 				  		 mess.setMessageType(Message.message_LoginSuccess);
-				  		 
-				  		String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
-						ptmt=conn.prepareStatement(friend_Relation_Sql);
-						ptmt.setString(1,userName);
-						rs=ptmt.executeQuery();
-						String friendString="";
-						while(rs.next()){
-							friendString=friendString+rs.getString("slaveuser")+" ";						
-	     }
-						mess.setContent(friendString);
-						System.out.println(userName+"的relation数据表中好友："+friendString);
 				}else{ 		
 				    mess.setMessageType(Message.message_LoginFailure);
 				}
 				sendMessage(s,mess);
 				
 				
-				if(loginSuccess){
+				if(passWord.equals("123456")){
 					mess.setMessageType(Message.message_NewOnlineFriend);
 					mess.setSender("Server");
 					mess.setContent(userName);

@@ -76,9 +76,9 @@ public class StartServer {
 				if(loginSuccess){
 				  		 mess.setMessageType(Message.message_LoginSuccess);
 				  		 
-				  		String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
+				  		String friend_Relation_Sql="select * from relation where majoruser=? and relationtype='1'";
 						ptmt=conn.prepareStatement(friend_Relation_Sql);
-						ptmt.setString(1,userName);
+						ptmt.setString(1, userName);
 						rs=ptmt.executeQuery();
 						String friendString="";
 						while(rs.next()){

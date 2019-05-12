@@ -44,7 +44,7 @@ public class ServerReceiverThread extends Thread{
 				Set friendSet=StartServer.hmSocket.keySet();
 				Iterator it=friendSet.iterator();
 				String friendName;
-				String friendString="";
+				String friendString=" ";
 				while(it.hasNext()){
 					friendName=(String)it.next();
 					if(!friendName.equals(mess.getSender()));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="C:\Users\李宁俊\Desktop\在yychat项目中使用数据库" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="RefactoringWizard.preview">
 		<item value="600" key="width"/>
 		<item value="400" key="height"/>
@@ -33,6 +34,9 @@
 	<section name="quick_assist_proposal_size">
 		<item value="321" key="size.y"/>
 		<item value="448" key="size.x"/>
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
 		<item value="1037" key="size.y"/>
