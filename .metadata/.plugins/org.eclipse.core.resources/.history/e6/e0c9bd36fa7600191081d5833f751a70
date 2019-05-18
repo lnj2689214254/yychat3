@@ -24,7 +24,7 @@ public class ClientConnect {
 			}
         	
         }
-        public Message loginValidateFromDB(User user){
+        public Message loginValidateFromD8(User user){
         	//boolean loginSuccess=false;
         	ObjectOutputStream oos;
         	 ObjectInputStream ois;

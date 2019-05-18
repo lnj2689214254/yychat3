@@ -96,7 +96,7 @@ public class ClientLogin extends JFrame implements ActionListener{
 			user.setPassword(password);
 			
 			//boolean loginSuccess=new ClientConnect().loginValidate(user);
-			Message mess=new ClientConnect().loginValidateFromDB(user);
+			Message mess=new ClientConnect().loginValidateFromD8(user);
 			
 			//if(loginSuccess){
 			if(mess.getMessageType().equals(Message.message_LoginSuccess)){

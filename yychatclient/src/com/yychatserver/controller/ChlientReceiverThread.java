@@ -39,7 +39,7 @@ public class ChlientReceiverThread  extends Thread{
 			}
 		
 		//第三步：
-		if(mess.getMessageType().equals(Message.message_OnlinFriend)){
+		if(mess.getMessageType().equals(Message.message_OnlineFriend)){
 			System.out.println("在线好友"+mess.getContent());
 			
 			

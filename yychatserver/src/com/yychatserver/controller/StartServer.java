@@ -43,7 +43,7 @@ public class StartServer {
 
 				//使用数据库进行用户身份认证
 				//1、加载驱动程序
-				Class.forName("com.mysql.jdbc.Driver");
+				/*Class.forName("com.mysql.jdbc.Driver");
 				System.out.println("已经加载了数据库驱动！");
 				//2、连接数据库
 				//String url="jdbc:mysql://127.0.0.1:3306/yychat";
@@ -63,9 +63,9 @@ public class StartServer {
 				ResultSet rs=ptmt.executeQuery();
 				
 				//5、根据结果集来判断是否能登录
-				boolean loginSuccess=rs.next();	
+				boolean loginSuccess=rs.next();	*/
 
-      
+      boolean loginSuccess=YychatDbUtil.loginValidate(userName, passWord);
 				
 				
 				
@@ -73,17 +73,20 @@ public class StartServer {
 				mess=new Message();
 				mess.setSender("Server");
 	            mess.setReceiver(userName);
+				
 				if(loginSuccess){
 				  		 mess.setMessageType(Message.message_LoginSuccess);
 				  		 
-				  		String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
+				  		//String friendString;
+						/*String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
 						ptmt=conn.prepareStatement(friend_Relation_Sql);
 						ptmt.setString(1,userName);
 						rs=ptmt.executeQuery();
 						String friendString="";
 						while(rs.next()){
-							friendString=friendString+rs.getString("slaveuser")+" ";						
-	     }
+							friendString=friendString+rs.getString("slaveuser")+" ";		*/				
+	     //}
+				  		 String friendString=YychatDbUtil.getFriendString(userName);
 						mess.setContent(friendString);
 						System.out.println(userName+"的relation数据表中好友："+friendString);
 				}else{ 		
@@ -119,11 +122,7 @@ public class StartServer {
 		} catch (ClassNotFoundException e) {
 			
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		} 
 	 }
 	private void sendMessage(Socket s, Message mess) throws IOException{
 		ObjectOutputStream oos=new ObjectOutputStream(s.getOutputStream());

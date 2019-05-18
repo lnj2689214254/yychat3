@@ -43,7 +43,7 @@ public class StartServer {
 
 				//使用数据库进行用户身份认证
 				//1、加载驱动程序
-				Class.forName("com.mysql.jdbc.Driver");
+				/*Class.forName("com.mysql.jdbc.Driver");
 				System.out.println("已经加载了数据库驱动！");
 				//2、连接数据库
 				//String url="jdbc:mysql://127.0.0.1:3306/yychat";
@@ -63,7 +63,7 @@ public class StartServer {
 				ResultSet rs=ptmt.executeQuery();
 				
 				//5、根据结果集来判断是否能登录
-				boolean loginSuccess=rs.next();	
+				boolean loginSuccess=rs.next();	*/
 
       
 				
@@ -78,7 +78,7 @@ public class StartServer {
 				  		 
 				  		String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
 						ptmt=conn.prepareStatement(friend_Relation_Sql);
-						ptmt.setString(1, userName);
+						ptmt.setString(1,userName);
 						rs=ptmt.executeQuery();
 						String friendString="";
 						while(rs.next()){

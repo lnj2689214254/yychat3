@@ -55,7 +55,7 @@ public class ServerReceiverThread extends Thread{
 					
 					//发送好友名字到客户端
 					mess.setContent(friendString);
-	                mess.setMessageType(Message.message_OnlinFriend);			
+	                mess.setMessageType(Message.message_OnlineFriend);			
 				mess.setSender("Server");
 				mess.setReceiver(sender);
 				sendMessage(s,mess);

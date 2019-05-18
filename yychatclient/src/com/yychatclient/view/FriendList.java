@@ -43,7 +43,7 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 	
 	String userName;
 	
-	public FriendList(String userName){
+	public FriendList(String userName, String friendString){
 		this.userName=userName;//局部变量给成员变量赋值
 		//第一张卡片，创建对象
 		myFriendPanel=new JPanel(new BorderLayout());//边界布局
@@ -56,10 +56,24 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		JPanel myFriendListJPanel;
 		static final int FRIENDCOUNT=51;
 		JLabel[]myfriendJLabel;*/
-		myFriendListJPanel=new JPanel(new GridLayout(FRIENDCOUNT-1,1));
-		for(int i=1;i<FRIENDCOUNT;i++){
-			myfriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"
-			myfriendJLabel[i].setEnabled(false);
+		
+		
+		
+			
+			String[] friendName=friendString.split(" ");
+			int count=friendName.length;
+			
+			myFriendListJPanel=new JPanel(new GridLayout(count,1));
+			for(int i=0;i<count;i++){
+				myfriendJLabel[i]=new JLabel(friendName[i]+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);
+			
+			
+			myfriendJLabel[i].addMouseListener(this);
+			myFriendListJPanel.add(myfriendJLabel[i]);
+		//myFriendListJPanel=new JPanel(new GridLayout(FRIENDCOUNT-1,1));
+		//for(int i=1;i<FRIENDCOUNT;i++){
+			//myfriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"
+			//myfriendJLabel[i].setEnabled(false);
 			myfriendJLabel[i].addMouseListener(this);//添加鼠标监听器
 			myFriendListJPanel.add(myfriendJLabel[i]);
 			}
