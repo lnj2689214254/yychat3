@@ -39,7 +39,77 @@ public class StartServer {
 				passWord=user.getPassword();
 				System.out.println(userName);
 				System.out.println(passWord);
+				//System.out.println(user.getUserMessageType());
 				
+				if(user.getUserMessageType().equals("USER_REGISTER")){
+				//输出
+					boolean seekUserResult=YychatDbUtil.seekUser(userName);
+					mess=new Message();
+					mess.setSender("Server");
+		            mess.setReceiver(userName);
+				if(seekUserResult){
+					mess.setMessageType(Message.message_RegisterFailure);
+				}else{
+					YychatDbUtil.addUser(userName,passWord);
+					mess.setMessageType(Message.message_RegisterSuccess);
+			}
+				sendMessage(s,mess);
+				s.close();
+			}
+				
+				
+				if(user.getUserMessageType().equals("USER_LOGIN")){
+					
+				
+				   boolean loginSuccess=YychatDbUtil.loginValidate(userName, passWord);
+					
+					mess=new Message();
+					mess.setSender("Server");
+		            mess.setReceiver(userName);
+					
+					if(loginSuccess){
+					  		 mess.setMessageType(Message.message_LoginSuccess);
+					  		 
+					  		//String friendString;
+							/*String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
+							ptmt=conn.prepareStatement(friend_Relation_Sql);
+							ptmt.setString(1,userName);
+							rs=ptmt.executeQuery();
+							String friendString="";
+							while(rs.next()){
+								friendString=friendString+rs.getString("slaveuser")+" ";		*/				
+		     //}
+					  		 String friendString=YychatDbUtil.getFriendString(userName);
+							mess.setContent(friendString);
+							System.out.println(userName+"的relation数据表中好友："+friendString);
+					}else{ 		
+					    mess.setMessageType(Message.message_LoginFailure);
+					}
+					sendMessage(s,mess);
+					
+					
+					if(loginSuccess){
+						mess.setMessageType(Message.message_NewOnlineFriend);
+						mess.setSender("Server");
+						mess.setContent(userName);
+					    
+						
+						Set onlineFriendSet=hmSocket.keySet();
+						Iterator it=onlineFriendSet.iterator();
+						String friendName;
+						while(it.hasNext()){
+							friendName=(String)it.next();
+							mess.setReceiver(friendName);
+							
+							Socket s1=(Socket)hmSocket.get(friendName);
+							sendMessage(s1,mess);
+							
+						}
+						
+						hmSocket.put(userName,s);
+						new ServerReceiverThread(s).start();
+					}
+				}
 
 				//使用数据库进行用户身份认证
 				//1、加载驱动程序
@@ -65,59 +135,9 @@ public class StartServer {
 				//5、根据结果集来判断是否能登录
 				boolean loginSuccess=rs.next();	*/
 
-      boolean loginSuccess=YychatDbUtil.loginValidate(userName, passWord);
-				
-				
-				
-				
-				mess=new Message();
-				mess.setSender("Server");
-	            mess.setReceiver(userName);
-				
-				if(loginSuccess){
-				  		 mess.setMessageType(Message.message_LoginSuccess);
-				  		 
-				  		//String friendString;
-						/*String friend_Relation_Sql="select slaveuser from relation where majoruser=? and relationtype='1'";
-						ptmt=conn.prepareStatement(friend_Relation_Sql);
-						ptmt.setString(1,userName);
-						rs=ptmt.executeQuery();
-						String friendString="";
-						while(rs.next()){
-							friendString=friendString+rs.getString("slaveuser")+" ";		*/				
-	     //}
-				  		 String friendString=YychatDbUtil.getFriendString(userName);
-						mess.setContent(friendString);
-						System.out.println(userName+"的relation数据表中好友："+friendString);
-				}else{ 		
-				    mess.setMessageType(Message.message_LoginFailure);
-				}
-				sendMessage(s,mess);
-				
-				
-				if(loginSuccess){
-					mess.setMessageType(Message.message_NewOnlineFriend);
-					mess.setSender("Server");
-					mess.setContent(userName);
-				    
-					
-					Set onlineFriendSet=hmSocket.keySet();
-					Iterator it=onlineFriendSet.iterator();
-					String friendName;
-					while(it.hasNext()){
-						friendName=(String)it.next();
-						mess.setReceiver(friendName);
-						
-						Socket s1=(Socket)hmSocket.get(friendName);
-						sendMessage(s1,mess);
-						
-					}
-					
-					hmSocket.put(userName,s);
-					new ServerReceiverThread(s).start();
-				}
-			}
-		} catch (IOException e) {
+   
+		}
+		}catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			

@@ -6,6 +6,15 @@ public class User implements Serializable{
      private String  userName;
      private  String password;
      
+private  String userMessageType;//"User_LOGIN_USER_REGISTER"
+     
+     
+	public String getUserMessageType() {
+	return userMessageType;
+}
+public void setUserMessageType(String userMessageType) {
+	this.userMessageType = userMessageType;
+}
 	public String getUserName() {
 		return userName;
 	}
