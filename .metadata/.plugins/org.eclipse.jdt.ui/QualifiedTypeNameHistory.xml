@@ -22,7 +22,6 @@
 <fullyQualifiedTypeName name="com.yychat.model.User"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-<fullyQualifiedTypeName name="com.yychatserver.controller.ClientConnect"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
 <fullyQualifiedTypeName name="java.net.Socket"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
@@ -43,4 +42,5 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.sql.Timestamp"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="com.yychatserver.controller.ClientConnect"/>
 </qualifiedTypeNameHistroy>
