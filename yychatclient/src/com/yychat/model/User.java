@@ -2,32 +2,33 @@ package com.yychat.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable{//序列化接口
-	private String userName;
-	private String passWord;
-	
-	//新用户注册， 步骤3：在User类中添加新的成员变量
-	private String userMessageType;//"USER_LOGIN"和"USER_REGISTER"
+public class User implements Serializable{
+     private String  userName;
+     private  String password;
+     private  String userMessageType;//"User_LOGIN_USER_REGISTER"
+     
+    
+     
+     
 	public String getUserMessageType() {
 		return userMessageType;
 	}
 	public void setUserMessageType(String userMessageType) {
 		this.userMessageType = userMessageType;
 	}
-	
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	public String getPassWord() {
-		return passWord;
+	public String getPassword() {
+		return password;
 	}
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
-	
+	public static void main(String[] args){
+     
+}
 }

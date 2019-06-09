@@ -13,7 +13,7 @@ import java.util.HashMap;
 import javax.swing.*;
 
 import com.yychat.model.Message;
-import com.yychatclient.controller.ClientConnect;
+import com.yychatserver.controller.ClientConnect;
 
 public class FriendList extends JFrame implements ActionListener,MouseListener{//顶层容器
 	public static HashMap hmFriendChat1=new HashMap<String,FriendChat1>();//键值对
@@ -77,7 +77,7 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		
 		/*myFriendListJPanel=new JPanel(new GridLayout(FRIENDCOUNT-1,1));
 		for(int i=1;i<FRIENDCOUNT;i++){
-			myFriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/YY1.gif"),JLabel.LEFT);//"1"标签
+			myFriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"标签
 			myFriendJLabel[i].setEnabled(false);//未激活所有图标
 			//激活自己的图标
 			//if(Integer.parseInt(userName)==i) myFriendJLabel[i].setEnabled(true);
@@ -135,7 +135,7 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		
 		myFriendListJPanel.setLayout(new GridLayout(count,1));
 		for(int i=0;i<count;i++){
-			myFriendJLabel[i]=new JLabel(friendName[i]+"",new ImageIcon("images/YY1.gif"),JLabel.LEFT);//"1"标签
+			myFriendJLabel[i]=new JLabel(friendName[i]+"",new ImageIcon("images/qq.gif"),JLabel.LEFT);//"1"标签
 			//myFriendJLabel[i].setEnabled(false);//未激活所有图标
 			//激活自己的图标
 			//if(Integer.parseInt(userName)==i) myFriendJLabel[i].setEnabled(true);
@@ -245,4 +245,7 @@ public class FriendList extends JFrame implements ActionListener,MouseListener{/
 		
 	}
 
+	
+
 }
+

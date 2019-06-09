@@ -9,12 +9,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.swing.*;
-import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 
 import com.yychat.model.Message;
-import com.yychatclient.controller.ClientConnect;
+import com.yychatserver.controller.ClientConnect;
 
-public class FriendChat1 extends JFrame implements ActionListener{//单继承
+public  class FriendChat1 extends JFrame implements ActionListener{
+      
+	
 
 	//Center部分
 	JScrollPane jsp;
@@ -27,15 +28,16 @@ public class FriendChat1 extends JFrame implements ActionListener{//单继承
 	
 	String sender;
 	String receiver;
+	String content;
 	
 	public FriendChat1(String sender,String receiver){
 		this.sender=sender;
 		this.receiver=receiver;
 		
-		jta = new JTextArea();//文本区域
+		jta =new JTextArea();//文本区域 
 		jta.setEditable(false);
 		jta.setForeground(Color.red);
-		jsp = new JScrollPane(jta);
+		jsp =new JScrollPane(jta);
 		this.add(jsp,"Center");
 		
 		jp=new JPanel();
@@ -48,48 +50,48 @@ public class FriendChat1 extends JFrame implements ActionListener{//单继承
 		this.add(jp,"South");
 		
 		this.setSize(350,240);
-		this.setTitle(sender+"正在和"+receiver+"聊天");
+		this.setTitle(sender+"正在和"+receiver+"好友聊天界面");
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);//居中显示窗口
-		this.setVisible(true);		
-	}
+	    this.setVisible(true); 
 	
-	public static void main(String[] args) {
+	}
+	public static void main(String[] args){
 		FriendChat1 friendChat=new FriendChat1("1","2");
-
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {//事件处理代码
-		if(arg0.getSource()==jb){
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==jb){
 			jta.append(jtf.getText()+"\r\n");
+	Message mess=new Message();
+		mess.setSender(sender);
+		mess.setReceiver(receiver);
+		mess.setContent(jtf.getText());
+		mess.setMessageType(Message.message_Common);
+		ObjectOutputStream oos;
+		try {
+			Socket s=(Socket)ClientConnect.hmSocket.get(sender);
+			oos = new ObjectOutputStream(s.getOutputStream());
+			oos.writeObject(mess);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		}
+	}
+	public void appendJta(String  showMessage){
+		jta.append(showMessage+"\r\n");
+	}
 			
-			//向服务器发送聊天信息
-			Message mess=new Message();
-			mess.setSender(sender);
-			mess.setReceiver(receiver);
-			mess.setContent(jtf.getText());
-			mess.setMessageType(Message.message_Common);
-			ObjectOutputStream oos;
-			try {
-				Socket s=(Socket)ClientConnect.hmSocket.get(sender);
-				oos = new ObjectOutputStream(s.getOutputStream());
-				oos.writeObject(mess);
-				
-				//能不能在这里接收其他人发送来的聊天信息？
-			/*	ObjectInputStream ois = new ObjectInputStream(ClientConnect.s.getInputStream());
-				mess=(Message)ois.readObject();//接收聊天信息
-				String showMessage=mess.getSender()+"对"+mess.getReceiver()+"说："+mess.getContent();
-				System.out.println(showMessage);
-				jta.append(showMessage+"\r\n");*/
-				
-			} catch (IOException  e) {				
-				e.printStackTrace();
-			}			
-		}		
-	}
-	
-	public void appendJta(String showMessage){
-		jta.append(showMessage+"\r\n");		
-	}
 }
+		
+		
+	
+
+	
+	
+		
+	
+
+	
+
